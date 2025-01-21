@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Aşamalı Onay</title>
+</head>
+<body>
+    <div class="container">
+        <form id="form1">
+            <h3>Hesap oluştur</h3>
+            <input type="text" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Confirm Password" required>
+            <div class="btn-box">
+                <button type="button" id="next1">İleri</button>
+            </div>
+        </form>
+        <form id="form2">
+            <h3>Sosyal medya adresleri</h3>
+            <input type="text" placeholder="Instagram">
+            <input type="text" placeholder="Github">
+            <input type="text" placeholder="Twitter">
+            <div class="btn-box">
+                <button type="button" id="back1">Geri</button>
+                <button type="button" id="next2">İleri</button>
+            </div>
+        </form>
+        <form id="form3">
+            <h3>Kişisel Bilgiler</h3>
+            <input type="text" placeholder="First Name" required>
+            <input type="text" placeholder="Last Name" required>
+            <input type="text" placeholder="Phone Num" required>
+            <div class="btn-box">
+                <button type="button" id="back2">Geri</button>
+                <button type="button" id="submit">Onayla</button>
+            </div>
+        </form>
+        <div class="step-row">
+            <div id="progress"></div>
+            <div class="step-col"><small>Adım 1</small></div>
+            <div class="step-col"><small>Adım 2</small></div>
+            <div class="step-col"><small>Adım 3</small></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
