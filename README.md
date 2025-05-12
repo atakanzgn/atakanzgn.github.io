@@ -1,1 +1,0 @@
-# atakanzgn.com.tr
