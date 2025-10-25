@@ -1,224 +1,769 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Öğrenci Asistanı - Privacy Policy & Terms</title>
+    <title>Finans Akışım</title>
     <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #121212 0%, #1f1f46 100%);
+            --card-bg: rgba(15, 15, 35, 0.75);
+            --accent: #4ade80;
+            --accent-strong: #22c55e;
+            --text-primary: #f9fafb;
+            --text-secondary: #cbd5f5;
+            --danger: #fb7185;
+            --danger-strong: #f43f5e;
+            --income: #34d399;
+            --expense: #f87171;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        .app {
+            width: min(1080px, 100%);
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 235, 0.08);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Login */
+        .auth-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            width: min(420px, 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: relative;
+        }
+
+        .login-card h1 {
+            font-size: 1.75rem;
+            line-height: 1.3;
+        }
+
+        .login-card p {
+            margin: 0;
+            color: var(--text-secondary);
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
         }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+
+        .login-card label {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
         }
-        
-        header {
-            background-color: #2196F3;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
+
+        .login-card input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 235, 0.2);
+            background: rgba(15, 15, 35, 0.55);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
-        
-        h1 {
-            margin: 0;
-            font-size: 24px;
+
+        .login-card input:focus {
+            outline: none;
+            border-color: rgba(74, 222, 128, 0.7);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
         }
-        
-        h2 {
-            color: #2196F3;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 30px;
+
+        .login-card button {
+            padding: 14px 18px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+            color: #0f172a;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        
-        h3 {
-            color: #555;
-            margin-top: 20px;
+
+        .login-card button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 30px rgba(74, 222, 128, 0.35);
         }
-        
-        p, ul {
-            margin-bottom: 15px;
+
+        .error {
+            color: var(--danger);
+            font-weight: 600;
         }
-        
-        ul {
-            padding-left: 20px;
+
+        /* Dashboard */
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
-        
-        .section {
-            margin-bottom: 40px;
+
+        header.dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .date {
-            font-style: italic;
-            color: #777;
-            margin-top: 20px;
+
+        .dashboard-header h1 {
+            font-size: clamp(1.8rem, 2.6vw, 2.4rem);
         }
-        
-        .contact {
-            background-color: #f7f7f7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid rgba(148, 163, 235, 0.35);
+            color: var(--text-secondary);
+            border-radius: 999px;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease;
         }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #f7f7f7;
-            color: #777;
-            font-size: 14px;
+
+        .logout-btn:hover {
+            color: #fff;
+            border-color: rgba(74, 222, 128, 0.65);
         }
-        
-        .nav {
-            background-color: #f7f7f7;
-            padding: 10px 0;
-            text-align: center;
+
+        .grid {
+            display: grid;
+            gap: 20px;
         }
-        
-        .nav a {
-            margin: 0 15px;
-            color: #2196F3;
-            text-decoration: none;
-            font-weight: bold;
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         }
-        
-        .nav a:hover {
-            text-decoration: underline;
+
+        .summary-card h2 {
+            font-size: 0.9rem;
+            letter-spacing: 0.06em;
+            color: rgba(148, 163, 235, 0.75);
+            text-transform: uppercase;
         }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
+
+        .summary-card strong {
+            font-size: clamp(1.75rem, 2.1vw, 2.2rem);
+        }
+
+        .summary-card span {
+            font-size: 0.9rem;
+            color: rgba(148, 163, 235, 0.7);
+        }
+
+        .summary-card.income strong {
+            color: var(--income);
+        }
+
+        .summary-card.expense strong {
+            color: var(--expense);
+        }
+
+        .summary-card.balance strong {
+            color: var(--accent);
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        }
+
+        .form-grid input,
+        .form-grid select,
+        .form-grid textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 235, 0.2);
+            background: rgba(15, 15, 35, 0.55);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-grid textarea {
+            min-height: 56px;
+            resize: vertical;
+        }
+
+        .form-grid input:focus,
+        .form-grid select:focus,
+        .form-grid textarea:focus {
+            outline: none;
+            border-color: rgba(74, 222, 128, 0.7);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+            color: #0f172a;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 24px rgba(74, 222, 128, 0.35);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid rgba(148, 163, 235, 0.12);
+        }
+
+        th {
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: rgba(148, 163, 235, 0.7);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .tag.income {
+            background: rgba(74, 222, 128, 0.1);
+            color: var(--income);
+        }
+
+        .tag.expense {
+            background: rgba(248, 113, 113, 0.1);
+            color: var(--expense);
+        }
+
+        .tag small {
+            font-size: 0.72rem;
+            opacity: 0.7;
+        }
+
+        .delete-btn {
+            background: none;
+            border: 1px solid rgba(248, 113, 113, 0.45);
+            color: var(--danger);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .delete-btn:hover {
+            color: var(--danger-strong);
+            border-color: rgba(244, 63, 94, 0.8);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .filters select {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 235, 0.2);
+            background: rgba(15, 15, 35, 0.55);
+            color: var(--text-primary);
+        }
+
+        .recent-transactions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .recent-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148, 163, 235, 0.08);
+        }
+
+        .recent-item span:first-child {
+            font-weight: 600;
+        }
+
+        .recent-item small {
+            color: rgba(148, 163, 235, 0.65);
+        }
+
+        @media (max-width: 960px) {
+            body {
+                padding: 16px;
             }
-            
-            h1 {
-                font-size: 20px;
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            header.dashboard-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-actions {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 12px;
+            }
+
+            .login-card {
+                padding: 0 4px;
+            }
+
+            table {
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Öğrenci Asistanı</h1>
-    </header>
-    
-    <div class="nav">
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms & Conditions</a>
-    </div>
-    
-    <div class="container">
-        <div class="section" id="privacy">
-            <h2>Privacy Policy</h2>
-            
-            <p>This privacy policy applies to the Öğrenci Asistanı app (hereby referred to as "Application") for mobile devices that was created by Atakanzgn (hereby referred to as "Service Provider") as a Free service. This service is intended for use "AS IS".</p>
-            
-            <h3>Information Collection and Use</h3>
-            <p>The Application collects information when you download and use it. This information may include information such as</p>
-            <ul>
-                <li>Your device's Internet Protocol address (e.g. IP address)</li>
-                <li>The pages of the Application that you visit, the time and date of your visit, the time spent on those pages</li>
-                <li>The time spent on the Application</li>
-                <li>The operating system you use on your mobile device</li>
-            </ul>
-            
-            <p>The Application does not gather precise information about the location of your mobile device.</p>
-            
-            <p>The Service Provider may use the information you provided to contact you from time to time to provide you with important information, required notices and marketing promotions.</p>
-            
-            <p>For a better experience, while using the Application, the Service Provider may require you to provide us with certain personally identifiable information, including but not limited to email, name, age, gender. The information that the Service Provider request will be retained by them and used as described in this privacy policy.</p>
-            
-            <h3>Third Party Access</h3>
-            <p>Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.</p>
-            
-            <p>Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:</p>
-            <ul>
-                <li>Google Play Services</li>
-            </ul>
-            
-            <p>The Service Provider may disclose User Provided and Automatically Collected Information:</p>
-            <ul>
-                <li>as required by law, such as to comply with a subpoena, or similar legal process;</li>
-                <li>when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;</li>
-                <li>with their trusted services providers who work on their behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement.</li>
-            </ul>
-            
-            <h3>Opt-Out Rights</h3>
-            <p>You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.</p>
-            
-            <h3>Data Retention Policy</h3>
-            <p>The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via the Application, please contact them at atakan.ozgun37@erzurum.edu.tr and they will respond in a reasonable time.</p>
-            
-            <h3>Children</h3>
-            <p>The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.</p>
-            
-            <p>The Application does not address anyone under the age of 13. The Service Provider does not knowingly collect personally identifiable information from children under 13 years of age. In the case the Service Provider discover that a child under 13 has provided personal information, the Service Provider will immediately delete this from their servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact the Service Provider (atakan.ozgun37@erzurum.edu.tr) so that they will be able to take the necessary actions.</p>
-            
-            <h3>Security</h3>
-            <p>The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains.</p>
-            
-            <h3>Changes</h3>
-            <p>This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.</p>
-            
-            <p class="date">This privacy policy is effective as of 2025-05-12</p>
-            
-            <h3>Your Consent</h3>
-            <p>By using the Application, you are consenting to the processing of your information as set forth in this Privacy Policy now and as amended by us.</p>
-            
-            <div class="contact">
-                <h3>Contact Us</h3>
-                <p>If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at atakan.ozgun37@erzurum.edu.tr.</p>
-            </div>
+    <div class="app">
+        <div id="login-screen" class="auth-container">
+            <section class="card login-card">
+                <div>
+                    <h1>Kişisel Finans Takibi</h1>
+                    <p>Güvenli alanınıza giriş yapın ve tüm gelir-gider akışınızı tek bir yerden yönetin.</p>
+                </div>
+                <form id="login-form">
+                    <label>
+                        Kullanıcı Adı
+                        <input type="text" id="username" name="username" autocomplete="username" required>
+                    </label>
+                    <label>
+                        Şifre
+                        <input type="password" id="password" name="password" autocomplete="current-password" required>
+                    </label>
+                    <button type="submit">Giriş Yap</button>
+                    <p id="login-error" class="error hidden">Kullanıcı adı veya şifre hatalı.</p>
+                </form>
+                <small style="color: rgba(148, 163, 235, 0.65);">Not: Bu uygulama yalnızca kişisel kullanım için tasarlanmıştır.</small>
+            </section>
         </div>
-        
-        <div class="section" id="terms">
-            <h2>Terms & Conditions</h2>
-            
-            <p>These terms and conditions apply to the Öğrenci Asistanı app (hereby referred to as "Application") for mobile devices that was created by Atakanzgn (hereby referred to as "Service Provider") as a Free service.</p>
-            
-            <p>Upon downloading or utilizing the Application, you are automatically agreeing to the following terms. It is strongly advised that you thoroughly read and understand these terms prior to using the Application. Unauthorized copying, modification of the Application, any part of the Application, or our trademarks is strictly prohibited. Any attempts to extract the source code of the Application, translate the Application into other languages, or create derivative versions are not permitted. All trademarks, copyrights, database rights, and other intellectual property rights related to the Application remain the property of the Service Provider.</p>
-            
-            <p>The Service Provider is dedicated to ensuring that the Application is as beneficial and efficient as possible. As such, they reserve the right to modify the Application or charge for their services at any time and for any reason. The Service Provider assures you that any charges for the Application or its services will be clearly communicated to you.</p>
-            
-            <p>The Application stores and processes personal data that you have provided to the Service Provider in order to provide the Service. It is your responsibility to maintain the security of your phone and access to the Application. The Service Provider strongly advise against jailbreaking or rooting your phone, which involves removing software restrictions and limitations imposed by the official operating system of your device. Such actions could expose your phone to malware, viruses, malicious programs, compromise your phone's security features, and may result in the Application not functioning correctly or at all.</p>
-            
-            <p>Please note that the Application utilizes third-party services that have their own Terms and Conditions. Below are the links to the Terms and Conditions of the third-party service providers used by the Application:</p>
-            <ul>
-                <li>Google Play Services</li>
-            </ul>
-            
-            <p>Please be aware that the Service Provider does not assume responsibility for certain aspects. Some functions of the Application require an active internet connection, which can be Wi-Fi or provided by your mobile network provider. The Service Provider cannot be held responsible if the Application does not function at full capacity due to lack of access to Wi-Fi or if you have exhausted your data allowance.</p>
-            
-            <p>If you are using the application outside of a Wi-Fi area, please be aware that your mobile network provider's agreement terms still apply. Consequently, you may incur charges from your mobile provider for data usage during the connection to the application, or other third-party charges. By using the application, you accept responsibility for any such charges, including roaming data charges if you use the application outside of your home territory (i.e., region or country) without disabling data roaming. If you are not the bill payer for the device on which you are using the application, they assume that you have obtained permission from the bill payer.</p>
-            
-            <p>Similarly, the Service Provider cannot always assume responsibility for your usage of the application. For instance, it is your responsibility to ensure that your device remains charged. If your device runs out of battery and you are unable to access the Service, the Service Provider cannot be held responsible.</p>
-            
-            <p>In terms of the Service Provider's responsibility for your use of the application, it is important to note that while they strive to ensure that it is updated and accurate at all times, they do rely on third parties to provide information to them so that they can make it available to you. The Service Provider accepts no liability for any loss, direct or indirect, that you experience as a result of relying entirely on this functionality of the application.</p>
-            
-            <p>The Service Provider may wish to update the application at some point. The application is currently available as per the requirements for the operating system (and for any additional systems they decide to extend the availability of the application to) may change, and you will need to download the updates if you want to continue using the application. The Service Provider does not guarantee that it will always update the application so that it is relevant to you and/or compatible with the particular operating system version installed on your device. However, you agree to always accept updates to the application when offered to you. The Service Provider may also wish to cease providing the application and may terminate its use at any time without providing termination notice to you. Unless they inform you otherwise, upon any termination, (a) the rights and licenses granted to you in these terms will end; (b) you must cease using the application, and (if necessary) delete it from your device.</p>
-            
-            <h3>Changes to These Terms and Conditions</h3>
-            <p>The Service Provider may periodically update their Terms and Conditions. Therefore, you are advised to review this page regularly for any changes. The Service Provider will notify you of any changes by posting the new Terms and Conditions on this page.</p>
-            
-            <p class="date">These terms and conditions are effective as of 2025-05-12</p>
-            
-            <div class="contact">
-                <h3>Contact Us</h3>
-                <p>If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at atakan.ozgun37@erzurum.edu.tr.</p>
-            </div>
-        </div>
+
+        <main id="dashboard" class="dashboard hidden">
+            <header class="dashboard-header">
+                <div>
+                    <h1>Finans Akışım</h1>
+                    <p style="color: var(--text-secondary); margin-top: 6px;">Güncel hareketlerinizi ve dengenizi tek bakışta görün.</p>
+                </div>
+                <button id="logout-btn" class="logout-btn">Çıkış Yap</button>
+            </header>
+
+            <section class="grid grid-3">
+                <article class="card summary-card balance">
+                    <h2>Toplam Bakiye</h2>
+                    <strong id="balance-total">₺0,00</strong>
+                    <span id="balance-diff">Bu ay net değişim: ₺0,00</span>
+                </article>
+                <article class="card summary-card income">
+                    <h2>Toplam Gelir</h2>
+                    <strong id="income-total">₺0,00</strong>
+                    <span id="income-month">Bu ay: ₺0,00</span>
+                </article>
+                <article class="card summary-card expense">
+                    <h2>Toplam Gider</h2>
+                    <strong id="expense-total">₺0,00</strong>
+                    <span id="expense-month">Bu ay: ₺0,00</span>
+                </article>
+            </section>
+
+            <section class="card">
+                <header style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+                    <div>
+                        <h2 style="font-size: 1.3rem;">Yeni İşlem Ekle</h2>
+                        <p style="color: var(--text-secondary); margin-top: 4px;">Gelir ve giderlerinizi anında kaydedin.</p>
+                    </div>
+                </header>
+                <form id="transaction-form">
+                    <div class="form-grid">
+                        <label style="display:flex; flex-direction:column; gap:8px; color: var(--text-secondary);">
+                            Tarih
+                            <input type="date" id="transaction-date" required>
+                        </label>
+                        <label style="display:flex; flex-direction:column; gap:8px; color: var(--text-secondary);">
+                            İşlem Tipi
+                            <select id="transaction-type" required>
+                                <option value="income">Gelir</option>
+                                <option value="expense">Gider</option>
+                            </select>
+                        </label>
+                        <label style="display:flex; flex-direction:column; gap:8px; color: var(--text-secondary);">
+                            Kategori
+                            <input type="text" id="transaction-category" placeholder="Örn. Maaş, Kira, Yemek" required>
+                        </label>
+                        <label style="display:flex; flex-direction:column; gap:8px; color: var(--text-secondary);">
+                            Tutar (₺)
+                            <input type="number" id="transaction-amount" min="0" step="0.01" required>
+                        </label>
+                        <label style="grid-column: 1 / -1; display:flex; flex-direction:column; gap:8px; color: var(--text-secondary);">
+                            Açıklama
+                            <textarea id="transaction-notes" placeholder="İsteğe bağlı not ekleyin"></textarea>
+                        </label>
+                    </div>
+                    <div class="form-actions" style="margin-top: 20px;">
+                        <button type="submit" class="primary-btn">İşlemi Kaydet</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="grid" style="grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 24px;">
+                <article class="card" style="display:flex; flex-direction:column; gap:20px;">
+                    <header style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                        <div>
+                            <h2 style="font-size:1.3rem;">İşlem Geçmişi</h2>
+                            <p style="color:var(--text-secondary); margin-top:4px;">Tüm hareketlerinizi detaylı inceleyin.</p>
+                        </div>
+                        <div class="filters">
+                            <select id="filter-type">
+                                <option value="all">Tümü</option>
+                                <option value="income">Gelir</option>
+                                <option value="expense">Gider</option>
+                            </select>
+                        </div>
+                    </header>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tarih</th>
+                                    <th>Kategori</th>
+                                    <th>Açıklama</th>
+                                    <th>Tip</th>
+                                    <th>Tutar</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-table"></tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h2 style="font-size:1.3rem; margin-bottom: 16px;">Son İşlemler</h2>
+                    <div id="recent-transactions" class="recent-transactions"></div>
+                </article>
+            </section>
+        </main>
     </div>
-    
-    <footer>
-        &copy; 2023 Öğrenci Asistanı - All Rights Reserved
-    </footer>
+
+    <script>
+        const credentials = {
+            username: "atakanzgn",
+            password: "Finans!2024"
+        };
+
+        const loginScreen = document.getElementById("login-screen");
+        const dashboard = document.getElementById("dashboard");
+        const loginForm = document.getElementById("login-form");
+        const loginError = document.getElementById("login-error");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        const transactionForm = document.getElementById("transaction-form");
+        const transactionDate = document.getElementById("transaction-date");
+        const transactionType = document.getElementById("transaction-type");
+        const transactionCategory = document.getElementById("transaction-category");
+        const transactionAmount = document.getElementById("transaction-amount");
+        const transactionNotes = document.getElementById("transaction-notes");
+        const transactionsTable = document.getElementById("transactions-table");
+        const filterType = document.getElementById("filter-type");
+        const recentTransactionsContainer = document.getElementById("recent-transactions");
+
+        const balanceTotal = document.getElementById("balance-total");
+        const balanceDiff = document.getElementById("balance-diff");
+        const incomeTotal = document.getElementById("income-total");
+        const incomeMonth = document.getElementById("income-month");
+        const expenseTotal = document.getElementById("expense-total");
+        const expenseMonth = document.getElementById("expense-month");
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat("tr-TR", {
+                style: "currency",
+                currency: "TRY",
+                minimumFractionDigits: 2
+            }).format(value);
+        }
+
+        function loadTransactions() {
+            try {
+                const stored = localStorage.getItem("finance-transactions");
+                return stored ? JSON.parse(stored) : [];
+            } catch (error) {
+                console.error("Veriler okunurken hata oluştu", error);
+                return [];
+            }
+        }
+
+        function generateId() {
+            if (window.crypto?.randomUUID) {
+                return window.crypto.randomUUID();
+            }
+            return `tx-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+
+        function saveTransactions(list) {
+            localStorage.setItem("finance-transactions", JSON.stringify(list));
+        }
+
+        function updateSummary(transactions) {
+            const totalIncome = transactions
+                .filter(item => item.type === "income")
+                .reduce((sum, item) => sum + item.amount, 0);
+            const totalExpense = transactions
+                .filter(item => item.type === "expense")
+                .reduce((sum, item) => sum + item.amount, 0);
+            const balance = totalIncome - totalExpense;
+
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+
+            const monthIncome = transactions
+                .filter(item => item.type === "income" && item.dateObj.getMonth() === currentMonth && item.dateObj.getFullYear() === currentYear)
+                .reduce((sum, item) => sum + item.amount, 0);
+            const monthExpense = transactions
+                .filter(item => item.type === "expense" && item.dateObj.getMonth() === currentMonth && item.dateObj.getFullYear() === currentYear)
+                .reduce((sum, item) => sum + item.amount, 0);
+            const monthDiff = monthIncome - monthExpense;
+
+            balanceTotal.textContent = formatCurrency(balance);
+            balanceDiff.textContent = `Bu ay net değişim: ${formatCurrency(monthDiff)}`;
+            incomeTotal.textContent = formatCurrency(totalIncome);
+            expenseTotal.textContent = formatCurrency(totalExpense);
+            incomeMonth.textContent = `Bu ay: ${formatCurrency(monthIncome)}`;
+            expenseMonth.textContent = `Bu ay: ${formatCurrency(monthExpense)}`;
+        }
+
+        function renderTransactions(transactions, filter = "all") {
+            const filtered = filter === "all" ? transactions : transactions.filter(item => item.type === filter);
+
+            transactionsTable.innerHTML = filtered.length
+                ? filtered
+                    .map(item => `
+                        <tr>
+                            <td>${item.date}</td>
+                            <td style="font-weight:600;">${item.category}</td>
+                            <td>${item.notes ? `<small style="color: rgba(148, 163, 235, 0.75);">${item.notes}</small>` : "-"}</td>
+                            <td>
+                                <span class="tag ${item.type}">
+                                    ${item.type === "income" ? "Gelir" : "Gider"}
+                                </span>
+                            </td>
+                            <td style="font-weight:600; color:${item.type === "income" ? "var(--income)" : "var(--expense)"};">${formatCurrency(item.amount)}</td>
+                            <td><button class="delete-btn" data-id="${item.id}">Sil</button></td>
+                        </tr>
+                    `)
+                    .join("")
+                : `<tr><td colspan="6" style="padding:24px; text-align:center; color: rgba(148, 163, 235, 0.6);">Filtreye uygun işlem bulunamadı.</td></tr>`;
+
+            const recentMarkup = transactions
+                .slice(0, 5)
+                .map(item => `
+                    <div class="recent-item">
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                            <span>${item.category}</span>
+                            <small>${item.date} • ${item.type === "income" ? "Gelir" : "Gider"}</small>
+                        </div>
+                        <span style="font-weight:600; color:${item.type === "income" ? "var(--income)" : "var(--expense)"};">${formatCurrency(item.amount)}</span>
+                    </div>
+                `)
+                .join("");
+
+            recentTransactionsContainer.innerHTML = recentMarkup || '<p style="color: rgba(148, 163, 235, 0.65);">Henüz kayıtlı işlem bulunmuyor.</p>';
+        }
+
+        function attachDeleteHandlers(transactions) {
+            transactionsTable.querySelectorAll(".delete-btn").forEach(button => {
+                button.addEventListener("click", () => {
+                    const id = button.getAttribute("data-id");
+                    const updated = transactions.filter(item => item.id !== id);
+                    const persistable = updated.map(({ dateObj, ...rest }) => rest);
+                    saveTransactions(persistable);
+                    refreshDashboard(updated);
+                });
+            });
+        }
+
+        function refreshDashboard(transactions) {
+            updateSummary(transactions);
+            renderTransactions(transactions, filterType.value);
+            attachDeleteHandlers(transactions);
+        }
+
+        function hydrateTransactions(rawList) {
+            return rawList
+                .map(item => ({
+                    ...item,
+                    dateObj: new Date(item.date)
+                }))
+                .sort((a, b) => b.dateObj - a.dateObj);
+        }
+
+        function ensureDefaultDate() {
+            const today = new Date().toISOString().split("T")[0];
+            transactionDate.value = today;
+        }
+
+        loginForm.addEventListener("submit", event => {
+            event.preventDefault();
+            const usernameValue = document.getElementById("username").value.trim();
+            const passwordValue = document.getElementById("password").value;
+
+            if (usernameValue === credentials.username && passwordValue === credentials.password) {
+                loginError.classList.add("hidden");
+                sessionStorage.setItem("finance-logged-in", "true");
+                showDashboard();
+            } else {
+                loginError.classList.remove("hidden");
+            }
+        });
+
+        function showDashboard() {
+            loginScreen.classList.add("hidden");
+            dashboard.classList.remove("hidden");
+            const transactions = hydrateTransactions(loadTransactions());
+            refreshDashboard(transactions);
+        }
+
+        logoutBtn.addEventListener("click", () => {
+            sessionStorage.removeItem("finance-logged-in");
+            dashboard.classList.add("hidden");
+            loginScreen.classList.remove("hidden");
+            loginForm.reset();
+            ensureDefaultDate();
+        });
+
+        transactionForm.addEventListener("submit", event => {
+            event.preventDefault();
+            const dateValue = transactionDate.value;
+            const typeValue = transactionType.value;
+            const categoryValue = transactionCategory.value.trim();
+            const amountValue = parseFloat(transactionAmount.value);
+            const notesValue = transactionNotes.value.trim();
+
+            if (!dateValue || !categoryValue || !amountValue || amountValue <= 0) {
+                return;
+            }
+
+            const transactions = hydrateTransactions(loadTransactions());
+            const newTransaction = {
+                id: generateId(),
+                date: dateValue,
+                dateObj: new Date(dateValue),
+                type: typeValue,
+                category: categoryValue,
+                amount: amountValue,
+                notes: notesValue
+            };
+
+            const updated = [newTransaction, ...transactions];
+            saveTransactions(updated.map(({ dateObj, ...rest }) => rest));
+            transactionForm.reset();
+            ensureDefaultDate();
+            refreshDashboard(updated);
+        });
+
+        filterType.addEventListener("change", () => {
+            const transactions = hydrateTransactions(loadTransactions());
+            renderTransactions(transactions, filterType.value);
+            attachDeleteHandlers(transactions);
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            ensureDefaultDate();
+            if (sessionStorage.getItem("finance-logged-in") === "true") {
+                showDashboard();
+            }
+        });
+    </script>
 </body>
 </html>
